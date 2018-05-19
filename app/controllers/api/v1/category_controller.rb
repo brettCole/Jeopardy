@@ -1,10 +1,21 @@
 class Api::V1::CategoryController < ApplicationController
 
   def index
-    random_starting_point = rand(1..100)
-    category_clues = JAPI::Trebek
-    binding.pry
-    render json: category_clues.categories(:count => 6, :offset => random_starting_point), status: 200
+    category_one = JAPI::Trebek.category(rand 1000)
+    category_two = JAPI::Trebek.category(rand 1000)
+    category_three = JAPI::Trebek.category(rand 1000)
+    category_four = JAPI::Trebek.category(rand 1000)
+    category_five = JAPI::Trebek.category(rand 1000)
+    category_six = JAPI::Trebek.category(rand 1000)
+    
+    render json: {
+      :category_one => category_one,
+      :category_two => category_two,
+      :category_three => category_three,
+      :category_four => category_four,
+      :category_five => category_five,
+      :category_six => category_six
+    }
   end
 
 end
