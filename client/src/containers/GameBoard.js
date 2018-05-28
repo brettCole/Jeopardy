@@ -16,22 +16,17 @@ class GameBoard extends Component {
   }
   
   render() {
-    debugger;
     return (
-      <Grid>
-        <CategoryHeader categoriesWithClues={this.props.categories} />
+      <Grid rows={6}>
+        <CategoryHeader />
         <ClueBoard />
       </Grid>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return { categories: state.categoriesWithClues.categoriesWithClues }
-}
-
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ fetchCategoriesWithClues }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameBoard);
+export default connect(null, mapDispatchToProps)(GameBoard);
