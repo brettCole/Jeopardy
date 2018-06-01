@@ -1,14 +1,14 @@
 import React from 'react';
 import { Item } from 'semantic-ui-react';
 
-const CategoryAndValues = (props) => {
+const CategoryTitleAndClues = (props) => {
   return (
     <Item>
       <Item.Content>
-        <Item.Header as='h2'>{props.categoryTitle.options.title}</Item.Header>
+        <Item.Header as='h2'>{props.children}</Item.Header>
       </Item.Content>
     </Item>
   )
 }
 
-export default CategoryAndValues;
+export default CategoryTitleAndClues;
