@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import CategoryHeader from './CategoryHeader';
 import ClueBoard from './ClueBoard';
-import { Grid } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchCategoriesWithClues } from '../actions';
 
 class GameBoard extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.fetchCategoriesWithClues();
@@ -17,10 +14,18 @@ class GameBoard extends Component {
   
   render() {
     return (
-      <Grid rows={6}>
+      <Table
+        color={'blue'}
+        columns={6}
+        celled
+        inverted
+        className='complete'
+        textAlign='center'
+        size='large'
+      >
         <CategoryHeader />
         <ClueBoard />
-      </Grid>
+      </Table>
     )
   }
 }
