@@ -7,8 +7,14 @@ import CategorieTitleAndClues from '../components/CategoryTitleAndClues';
 class ClueBoard extends Component {
 
   test = (e) => {
+    <Modal open>
+      <Modal.Content>
+        <Modal.Description>
+          <p>testing</p>
+        </Modal.Description>
+      </Modal.Content>
+    </Modal>
     debugger;
-      <Modal>Testing</Modal>
   }
 
   render() {
