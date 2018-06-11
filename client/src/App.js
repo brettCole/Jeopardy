@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import JeopardyLogo from './components/JeopardyLogo';
+
+import GameBoard from './containers/GameBoard';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <JeopardyLogo />
+        <GameBoard />
       </div>
     );
   }
