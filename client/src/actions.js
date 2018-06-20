@@ -24,3 +24,9 @@ export function fetchCategoriesWithClues() {
       .then(data => dispatch(receiveCategoriesWithClues(data)))
   }
 }
+
+export function modalOpenClick() {
+  return dispatch => {
+    dispatch({ type: 'MODAL_OPEN_AND_CLOSE' });
+  }
+}
