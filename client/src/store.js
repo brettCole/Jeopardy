@@ -4,10 +4,12 @@ import thunkMiddleware from 'redux-thunk';
 // reducers
 import loadingNotLoading from './reducers/loadingNotLoading';
 import categoriesWithClues from './reducers/categoriesWithClues';
+import modalOpenClick from './reducers/modalOpenClick';
 
 const reducers = combineReducers({
   loadingNotLoading,
-  categoriesWithClues
+  categoriesWithClues,
+  modalOpenClick
 })
 
 const middleware = [thunkMiddleware, logger];
