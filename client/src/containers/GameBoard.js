@@ -31,7 +31,9 @@ class GameBoard extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchCategoriesWithClues }, dispatch);
+  return bindActionCreators({ 
+    fetchCategoriesWithClues,
+  }, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(GameBoard);
