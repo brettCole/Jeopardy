@@ -27,6 +27,12 @@ export function fetchCategoriesWithClues() {
 
 export function modalOpenClick() {
   return dispatch => {
-    dispatch({ type: 'MODAL_OPEN_AND_CLOSE' });
+    dispatch({ type: 'MODAL_OPEN' });
+  }
+}
+
+export function modalCloseClick() {
+  return dispatch => {
+    dispatch({ type: 'MODAL_CLOSE' });
   }
 }
