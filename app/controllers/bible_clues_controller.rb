@@ -8,7 +8,7 @@ class BibleCluesController < ApplicationController
   private
 
   def bible_clue_params
-    params.require(:bible_clues).permit(:description, :bible_category_id)
+    params.require(:bible_clues).permit(:description, :answer, :point_value, :bible_category_id)
   end
 
 end

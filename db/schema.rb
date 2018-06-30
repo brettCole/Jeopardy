@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2018_06_27_011202) do
 
   create_table "bible_clues", force: :cascade do |t|
     t.string "description"
+    t.string "answer"
+    t.integer "point_value"
     t.bigint "bible_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
