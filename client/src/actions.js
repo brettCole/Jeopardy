@@ -10,6 +10,7 @@ export function receiveCategoriesWithClues(data) {
   }
 }
 
+// fetch categories w/clues from jService
 export function fetchCategoriesWithClues() {
   return dispatch => {
     dispatch({ type: 'CATEGORIES_WITH_CLUES_FETCH_LOADING' });
@@ -25,14 +26,53 @@ export function fetchCategoriesWithClues() {
   }
 }
 
+// fetch Bible Categories w/Clues
+export function fetchBibleCategoriesWithClues() {
+  return dispatch => {
+    dispatch({ type: 'BIBLE_CATEGORIES_WITH_CLUES_FETCH_LOADING' });
+    return fetch('http://localhost:3001/bible_categories.json', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content_type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => dispatch(receiveCategoriesWithClues(data)))
+  }
+}
+
+// open modal with clue
 export function modalOpenClick() {
   return dispatch => {
     dispatch({ type: 'MODAL_OPEN' });
   }
 }
 
+// close modal with clue
 export function modalCloseClick() {
   return dispatch => {
     dispatch({ type: 'MODAL_CLOSE' });
+  }
+}
+
+// display current clue
+export function displayClue(data) {
+  return dispatch => {
+    dispatch({ 
+      type: 'DISPLAY_CLUE',
+      payload: data
+    });
+    dispatch({ type: 'REMOVE_CLUE_FROM_ALL_CLUES' });
+  }
+}
+
+// hold current player
+export function currentPlayer(data) {
+  return dispatch => {
+    dispatch({
+      type: 'CURRENT_PLAYER',
+      payload: data
+    });
   }
 }
