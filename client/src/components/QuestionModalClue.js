@@ -4,53 +4,50 @@ import ModalPlayerButtons from './ModalPlayerButtons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { currentPlayer } from '../actions';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 
 class QuestionModalClue extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      disabled: true,
-      hidden: true,
-      correct: false,
-      value: ''
-    }
-    this.playersAnswer = this.playersAnswer.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+    // variable names to be assigned depending on result of answer
+    this.correctAnswer;
+    this.incorrectAnswer;
 
-  handleChange(e) {
-    this.setState({
-      value: e.target.value
-    });
+    this.playersAnswer = this.playersAnswer.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({
-      hidden: false,
-      value: ''
-    })
-    if (this.state.value.toLowerCase() === this.props.clue.answer.toLowerCase()) {
-      this.setState({
-        correct: true
-      })
+    if (this.props.answerValue.toLowerCase() === this.props.clue.answer.toLowerCase()) {
+      this.correctAnswer = <Message
+        size="massive"
+        color="green"
+        header="Correct Answer"
+        content="Current score plus 200"
+      />
+      this.forceUpdate();
+    } else {
+      this.incorrectAnswer = <Message
+        size="massive"
+        color="red"
+        header="Incorrect Answer"
+        content="Current score minus 200"
+      />
+      this.forceUpdate();
     }
-    this.setState({
-      disabled: true
-    })
   }
 
   playersAnswer = (e) => {
     let player = e.currentTarget.textContent;
     this.props.currentPlayer(player);
-    this.setState({
-      disabled: false
-    })
   }
 
   render() {
+
+    const { answerValue } = this.props; 
+
     return (
       <Modal 
         open={this.props.modalOpen}
@@ -62,60 +59,51 @@ class QuestionModalClue extends Component {
         <Modal.Content
           style={{ 'backgroundColor': '#2185d0', 'color': '#fff' }}
         >
-          {this.props.clue !== undefined &&
-            <Modal.Header
-              as='h1'
-              onClick={this.props.test}      
-            >
-              {this.props.clue.description}
-            </Modal.Header>
+          {
+            this.props.clue !== undefined &&
+              <Modal.Header
+                as='h1'
+                onClick={this.props.modalClose}      
+              >
+                {this.props.clue.description}
+              </Modal.Header>
           }
         </Modal.Content>
         <ModalPlayerButtons playersAnswer={this.playersAnswer} />
-      
         <Form
           as='form'
           size='massive'
           onSubmit={this.handleSubmit}
         >
-          <Form.Field width={6} style={{ 'marginLeft': 'auto', 'marginRight': 'auto', 'marginTop': '20px', 'marginBottom': '10px' }}
-            disabled={this.state.disabled}
+          <Form.Field 
+            width={6} 
+            style={{ 'marginLeft': 'auto', 'marginRight': 'auto', 'marginTop': '20px', 'marginBottom': '10px' }}
+            disabled={this.props.playerGuessing == undefined}
           >
             <label style={{'color': 'white'}}>Player's Answer</label>
-            <Form.Input 
-              type="text"
-              placeholder="What is..."
-              value={this.state.value}
-              onChange={this.handleChange}
+            <Field 
+              name='playerAnswer' 
+              component='input' 
+              type='text' 
+              placeholder='What is... ?' 
             />
           </Form.Field>
           <Form.Field
             width={6}
             style={{ 'marginLeft': 'auto', 'marginRight': 'auto', 'marginTop': '20px', 'marginBottom': '10px' }}
           >
-          {
-            this.state.correct ? (
-              <Message
-                hidden={this.state.hidden}
-                size="massive"
-                color="green"
-                header="Correct Answer"
-                content="Current score plus 200"
-              />
-            ) : (
-              <Message
-                hidden={this.state.hidden}
-                size="massive"
-                color="red"
-                header="Incorrect Answer"
-                content="Current score minus 200"
-              />
-            )
-          }
+            {this.correctAnswer}
+            {this.incorrectAnswer}
           </Form.Field>
         </Form>
       </Modal>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    playerGuessing: state.currentPlayer.currentPlayer
   }
 }
 
@@ -125,4 +113,17 @@ const mapDispatchToProps = dispatch => {
   }, dispatch);  
 }
 
-export default connect(null, mapDispatchToProps)(QuestionModalClue);
+QuestionModalClue = reduxForm({
+  form: 'answer'
+})(QuestionModalClue);
+
+const selector = formValueSelector('answer');
+
+QuestionModalClue = connect(state => {
+  const answerValue = selector(state, 'playerAnswer')
+  return {
+    answerValue,
+  }
+})(QuestionModalClue);
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionModalClue);
