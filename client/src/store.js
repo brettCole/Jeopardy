@@ -7,13 +7,15 @@ import categoriesWithClues from './reducers/categoriesWithClues';
 import modalOpenClick from './reducers/modalOpenClick';
 import displayAndClues from './reducers/displayAndCountClues';
 import currentPlayer from './reducers/currentPlayer';
+import { reducer as formReducer } from 'redux-form';
 
 const reducers = combineReducers({
   loadingNotLoading,
   categoriesWithClues,
   displayAndClues,
   modalOpenClick,
-  currentPlayer
+  currentPlayer,
+  form: formReducer
 })
 
 const middleware = [thunkMiddleware, logger];
