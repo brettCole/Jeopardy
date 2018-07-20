@@ -21,7 +21,7 @@ class ClueBoard extends Component {
     let currentModalCategory = this.props.categoryClues[e.currentTarget.cellIndex];
     let clue;
     for (let i = 0; i < currentModalCategory.bible_clues.length; i++) {
-      if (currentModalCategory.bible_clues[i].point_value === parseInt(e.currentTarget.innerText), 10) {
+      if (currentModalCategory.bible_clues[i].point_value === parseInt(e.currentTarget.innerText, 10)) {
         clue = currentModalCategory.bible_clues[i];
         break;
       }
