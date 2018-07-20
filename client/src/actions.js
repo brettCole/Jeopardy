@@ -49,10 +49,12 @@ export function modalOpenClick() {
   }
 }
 
-// close modal with clue
+// close modal and clear clue
 export function modalCloseClick() {
   return dispatch => {
-    dispatch({ type: 'MODAL_CLOSE' });
+    dispatch({ type: 'MODAL_CLOSE'
+  });
+  dispatch({ type: 'CLEAR_CLUE'});
   }
 }
 
@@ -76,3 +78,4 @@ export function currentPlayer(data) {
     });
   }
 }
+
