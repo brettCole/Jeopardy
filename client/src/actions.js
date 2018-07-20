@@ -55,6 +55,7 @@ export function modalCloseClick() {
     dispatch({ type: 'MODAL_CLOSE'
   });
   dispatch({ type: 'CLEAR_CLUE'});
+  dispatch({ type: 'REMOVE_CURRENT_PLAYER'});
   }
 }
 
@@ -79,3 +80,10 @@ export function currentPlayer(data) {
   }
 }
 
+export function removeCurrentPlayer() {
+  return dispatch => {
+    dispatch({
+      type: 'REMOVE_CURRENT_PLAYER'
+    });
+  }
+}
