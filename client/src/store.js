@@ -7,6 +7,7 @@ import categoriesWithClues from './reducers/categoriesWithClues';
 import modalOpenClick from './reducers/modalOpenClick';
 import displayAndClues from './reducers/displayAndCountClues';
 import currentPlayer from './reducers/currentPlayer';
+import teamScores from './reducers/teamScores';
 import { reducer as formReducer } from 'redux-form';
 
 const reducers = combineReducers({
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   displayAndClues,
   modalOpenClick,
   currentPlayer,
+  teamScores,
   form: formReducer
 })
 
