@@ -80,10 +80,22 @@ export function currentPlayer(data) {
   }
 }
 
+// remove current player from redux store
 export function removeCurrentPlayer() {
   return dispatch => {
     dispatch({
       type: 'REMOVE_CURRENT_PLAYER'
+    });
+  }
+}
+
+// pass score to team
+export function addToTeamScore(playerGuessing, point_value) {
+  return dispatch => {
+    dispatch({
+      type: 'ADD_TO_TEAMS_SCORE',
+      playerGuessing: playerGuessing,
+      point_value: point_value
     });
   }
 }
