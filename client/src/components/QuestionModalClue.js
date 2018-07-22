@@ -3,7 +3,7 @@ import { Form, Message, Modal } from 'semantic-ui-react';
 import ModalPlayerButtons from './ModalPlayerButtons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addToTeamScore, currentPlayer, removeCurrentPlayer } from '../actions';
+import { addToTeamScore, currentPlayer, removeCurrentPlayer, subtractFromTeamScore } from '../actions';
 import { Field, reduxForm, formValueSelector, reset } from 'redux-form';
 
 class QuestionModalClue extends Component {
@@ -37,6 +37,7 @@ class QuestionModalClue extends Component {
         header="Incorrect Answer"
         content={`Current score minus ${this.props.clue.point_value}`}
       />
+      this.props.subtractFromTeamScore(this.props.playerGuessing, this.props.clue.point_value);
       this.forceUpdate();
     }
     this.props.removeCurrentPlayer();
@@ -114,7 +115,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     addToTeamScore,
     currentPlayer,
-    removeCurrentPlayer
+    removeCurrentPlayer,
+    subtractFromTeamScore
   }, dispatch);  
 }
 

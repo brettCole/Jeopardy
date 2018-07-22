@@ -5,13 +5,21 @@ export default function teamScores(state = [
 ], action) {
   switch(action.type) {
     case 'ADD_TO_TEAMS_SCORE':
-      const updatedScore = state.map((each, i) => {
+      const addedToScore = state.map((each, i) => {
         if (action.playerGuessing === Object.keys(each).toString()) {
-          return {[Object.keys(each).toString()]:parseInt(Object.values(each)) + action.point_value}
+          return {[Object.keys(each).toString()] : parseInt(Object.values(each)) + action.point_value}
         }
           return each
         })
-        return updatedScore
+        return addedToScore
+    case 'SUBTRACT_FROM_TEAM_SCORE':
+      const subtractedFromScore = state.map((each, i) => {
+        if (action.playerGuessing === Object.keys(each).toString()) {
+          return {[Object.keys(each).toString()] : parseInt(Object.values(each)) - action.point_value}
+        }
+          return each
+      })
+      return subtractedFromScore
     default:
       return state;
   }

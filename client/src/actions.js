@@ -99,3 +99,14 @@ export function addToTeamScore(playerGuessing, point_value) {
     });
   }
 }
+
+// subtract score from team
+export function subtractFromTeamScore(playerGuessing, point_value) {
+  return dispatch => {
+    dispatch({
+      type: 'SUBTRACT_FROM_TEAM_SCORE',
+      playerGuessing: playerGuessing,
+      point_value: point_value
+    });
+  }
+}
