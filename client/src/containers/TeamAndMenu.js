@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import { Table } from 'semantic-ui-react';
 import CategorieTitleAndClues from '../components/CategoryTitleAndClues';
 
@@ -16,6 +16,9 @@ class TeamAndMenu extends Component {
             <CategorieTitleAndClues>
               Team {i + 1}
             </CategorieTitleAndClues>
+            <CategorieTitleAndClues>
+              {Object.values(this.props.score[i])}
+            </CategorieTitleAndClues>
           </Table.Cell>
         )
     }
@@ -24,17 +27,17 @@ class TeamAndMenu extends Component {
 
   render() {
     return (
-
       <Table.Row>
-        {/* <Table.Cell
-          selectable
-        > */}
           {this.players()}
-        {/* </Table.Cell> */}
       </Table.Row>
-    
     )
   }
 }
 
-export default TeamAndMenu;
+const mapStateToProps = state => {
+  return {
+    score: state.teamScores
+  }
+}
+
+export default connect(mapStateToProps)(TeamAndMenu);
