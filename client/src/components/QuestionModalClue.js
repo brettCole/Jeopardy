@@ -1,10 +1,10 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import { Form, Message, Modal } from 'semantic-ui-react';
 import ModalPlayerButtons from './ModalPlayerButtons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { currentPlayer } from '../actions';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { addToTeamScore, currentPlayer, removeCurrentPlayer } from '../actions';
+import { Field, reduxForm, formValueSelector, reset } from 'redux-form';
 
 class QuestionModalClue extends Component {
   constructor(props) {
@@ -20,23 +20,26 @@ class QuestionModalClue extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.props.reset();
     if (this.props.answerValue.toLowerCase() === this.props.clue.answer.toLowerCase()) {
       this.correctAnswer = <Message
         size="massive"
         color="green"
         header="Correct Answer"
-        content="Current score plus 200"
+        content={`Current score plus ${this.props.clue.point_value}`}
       />
+      this.props.addToTeamScore(this.props.playerGuessing, this.props.clue.point_value);
       this.forceUpdate();
     } else {
       this.incorrectAnswer = <Message
         size="massive"
         color="red"
         header="Incorrect Answer"
-        content="Current score minus 200"
+        content={`Current score minus ${this.props.clue.point_value}`}
       />
       this.forceUpdate();
     }
+    this.props.removeCurrentPlayer();
   }
 
   playersAnswer = (e) => {
@@ -109,7 +112,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    currentPlayer
+    addToTeamScore,
+    currentPlayer,
+    removeCurrentPlayer
   }, dispatch);  
 }
 
