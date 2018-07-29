@@ -1,13 +1,12 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-import { connect } from 'react-redux';
 
 const ModalPlayerButtons = (props) => {
   const players = () => {
     let finalPlayers = [];
     for (let i = 0; i < 3; i++) {
       finalPlayers.push(
-        <Button key={i} size="massive" onClick={props.playersAnswer}>Player {i + 1}</Button>
+        <Button key={i} size="massive" onClick={props.playersAnswer}>Team {i + 1}</Button>
       )
     }
     return finalPlayers
@@ -21,4 +20,4 @@ const ModalPlayerButtons = (props) => {
   )
 }
 
-export default connect()(ModalPlayerButtons);
+export default ModalPlayerButtons;
