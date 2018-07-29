@@ -107,7 +107,8 @@ class QuestionModalClue extends Component {
 
 const mapStateToProps = state => {
   return {
-    playerGuessing: state.currentPlayer.currentPlayer
+    playerGuessing: state.currentPlayer.currentPlayer,
+    modalOpenClose: state.modalOpenClick.modalOpen
   }
 }
 
