@@ -7,7 +7,6 @@ import CategoryTitleAndClues from '../components/CategoryTitleAndClues';
 class CategoryHeader extends Component {
 
   render() {
-
     const categories = ['category_one', 'category_two', 'category_three', 'category_four', 'category_five', 'category_six'];
 
     return (
@@ -25,7 +24,7 @@ class CategoryHeader extends Component {
                     </CategoryTitleAndClues>
                   </Table.HeaderCell>
                 )
-              })           
+              })
           }
         </Table.Row> 
       </Table.Header>

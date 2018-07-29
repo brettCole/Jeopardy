@@ -1,0 +1,21 @@
+Tasks:
+  New Task:
+    ☐ Make clue modal bigger
+    ☐ Increase clue font size
+    ✔ Change modal background color to #2185d0 @done (7/3/2018, 10:46:52 PM)
+    ✔ Change clue font color to white @done (7/3/2018, 10:47:07 PM)
+    ✔ Fix error with display correct clue @critical @done (2018-7-19 20:58:15)
+    ☐ Create a function that when clue is finished being read then a timer starts for people to buzz in (10 seconds) if wrong (10 seconds)
+    ☐ Create a team and nav menu bar for bottom of board
+    ✔ Each team should display their score next to their name @done (2018-7-22 19:25:09)
+    ☐ Add function to change Modal state when click on clue hopefully
+    ✔ Make Modal a class component because it will need state @done (2018-7-19 20:59:32)
+    ✔ Keep track of each player's score with redux state @done (2018-7-22 19:25:18)
+    ☐ Create CSS to remove inline styles from components
+    ✔ Display Player 1, Player 2, Player 3 inside modal with clue @done (7/6/2018, 10:00:01 AM)
+      ✔ When a Player is clicked inside modal then an answer input is displayed @done (2018-7-19 20:59:53)
+    ☐ Initially show players in modal, then when a player is clicked remove players and replace with form input.
+      ☐ If wrong answer remove form and reshow players.
+    ☐ Remove current player when Modal is closed or wrong answer
+    ✔ Remove displayedClue when modal closes @done (2018-7-22 19:25:56)
+    
