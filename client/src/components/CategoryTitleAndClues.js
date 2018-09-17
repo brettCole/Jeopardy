@@ -8,11 +8,11 @@ const CategoryTitleAndClues = (props) => {
         {
           props.what ? (
             <Fragment>
-              <Item.Header as='h1' style={{ 'display': 'inline', 'marginRight': '25%' }}>{props.children}</Item.Header>
-              <Item.Header as='h1' style={{ 'display': 'inline', 'marginLeft': '25%' }}>200</Item.Header>
+              <Item.Header as='h1' style={{ 'display': 'inline', 'marginLeft': '25%', 'fontSize':'xxx-large' }}>200</Item.Header>
+              <Item.Header as='h1' style={{ 'display': 'inline', 'marginRight': '25%', 'fontSize': 'xxx-large' }}>{props.children}</Item.Header>
             </Fragment>
           ) : (
-            <Item.Header as='h1'>
+            <Item.Header as='h1' style={{ 'fontSize':'3rem', fontWeight:'bold' }}>
               {props.children}
             </Item.Header>
           )

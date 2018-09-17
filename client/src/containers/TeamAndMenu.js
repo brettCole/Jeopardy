@@ -7,14 +7,15 @@ class TeamAndMenu extends Component {
 
   players = () => {
     let final = [];
-    for (let i = 0; i < 3; i++) {
+    let teams = ['Am-haarets', 'Gadites', 'Beroeans'];
+    for (let i = 0; i < teams.length; i++) {
         final.push(
           <Table.Cell
             selectable
             colSpan="2"
           >
             <CategorieTitleAndClues>
-              Team {i + 1}
+              {teams[i]}
             </CategorieTitleAndClues>
             <CategorieTitleAndClues>
               {Object.values(this.props.score[i])}

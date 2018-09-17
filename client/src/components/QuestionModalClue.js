@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Message, Modal } from 'semantic-ui-react';
+import { Button, Form, Icon, Message, Modal } from 'semantic-ui-react';
 import ModalPlayerButtons from './ModalPlayerButtons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addToTeamScore, currentPlayer, removeCurrentPlayer, subtractFromTeamScore } from '../actions';
+import { addToTeamScore, currentPlayer, removeCurrentPlayer, resetPointValue, subtractFromTeamScore } from '../actions';
 import { Field, reduxForm, formValueSelector, reset } from 'redux-form';
 
 class QuestionModalClue extends Component {
@@ -11,37 +11,67 @@ class QuestionModalClue extends Component {
     super(props);
 
     // variable names to be assigned depending on result of answer
-    this.correctAnswer;
-    this.incorrectAnswer;
+    this.correctAnswer = '';
+    this.incorrectAnswer = '';
+    this.needTheAnswer = '';
 
+    // functions
     this.playersAnswer = this.playersAnswer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.showClueAnswer = this.showClueAnswer.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.reset();
-    if (this.props.answerValue.toLowerCase() === this.props.clue.answer.toLowerCase()) {
+    if (this.props.answerValue.toLowerCase() === this.props.clue.answer.toLowerCase() && this.props.playerGuessing !== '') {
       this.correctAnswer = <Message
         size="massive"
         color="green"
         header="Correct Answer"
-        content={`Current score plus ${this.props.clue.point_value}`}
+        content={`${this.props.playerGuessing} gets ${this.props.clue.point_value}`}
       />
       this.props.addToTeamScore(this.props.playerGuessing, this.props.clue.point_value);
-      this.forceUpdate();
+      this.props.resetPointValue(this.props.clue);
+      setTimeout(() => {
+        this.correctAnswer = '';
+        this.incorrectAnswer = '';
+        this.props.modalClose();
+      }, 4000);
     } else {
       this.incorrectAnswer = <Message
         size="massive"
         color="red"
         header="Incorrect Answer"
-        content={`Current score minus ${this.props.clue.point_value}`}
+        content={`${this.props.playerGuessing} loses ${this.props.clue.point_value}`}
       />
       this.props.subtractFromTeamScore(this.props.playerGuessing, this.props.clue.point_value);
-      this.forceUpdate();
+      setTimeout(() => {
+        this.correctAnswer = '';
+        this.incorrectAnswer = '';
+      }, 4000);
     }
     this.props.removeCurrentPlayer();
   }
+
+  showClueAnswer(e) {
+    e.preventDefault();
+    this.needTheAnswer = <Message
+      size="massive"
+      color="orange"
+      header="Correct Answer Is..."
+      content={`${this.props.clue.answer}`}
+    />
+    // this.forceUpdate();
+    this.props.resetPointValue(this.props.clue);
+    setTimeout(() => {
+      this.correctAnswer = '';
+      this.incorrectAnswer = '';
+      this.needTheAnswer = '';
+      this.props.modalClose();
+    }, 0)
+  }
+
 
   playersAnswer = (e) => {
     let player = e.currentTarget.textContent;
@@ -51,8 +81,9 @@ class QuestionModalClue extends Component {
   render() {
 
     const { answerValue } = this.props; 
-
+  
     return (
+      
       <Modal 
         open={this.props.modalOpen}
         centered={true}
@@ -67,13 +98,31 @@ class QuestionModalClue extends Component {
             this.props.clue !== undefined &&
               <Modal.Header
                 as='h1'
-                onClick={this.props.modalClose}      
+                onClick={this.props.modalClose}
+                style={{ fontSize:'4rem' }}     
               >
                 {this.props.clue.description}
               </Modal.Header>
           }
         </Modal.Content>
         <ModalPlayerButtons playersAnswer={this.playersAnswer} />
+        <div>
+          <Button
+            as='button'
+            animated
+            size="big"
+            color="orange"
+            onClick={this.showClueAnswer}
+          >
+            <Button.Content visible>
+              <Icon name='frown outline' />
+              What is... We don't know!
+            </Button.Content>
+            <Button.Content hidden>
+              We need the answer!
+            </Button.Content>
+          </Button>
+        </div>
         <Form
           as='form'
           size='massive'
@@ -82,14 +131,15 @@ class QuestionModalClue extends Component {
           <Form.Field 
             width={6} 
             style={{ 'marginLeft': 'auto', 'marginRight': 'auto', 'marginTop': '20px', 'marginBottom': '10px' }}
-            disabled={this.props.playerGuessing == undefined}
+            disabled={this.props.playerGuessing === undefined}
           >
-            <label style={{'color': 'white'}}>Player's Answer</label>
+            <label style={{ 'color': 'white', fontSize:'3rem' }}>Player's Answer</label>
             <Field 
               name='playerAnswer' 
               component='input' 
               type='text' 
               placeholder='What is... ?' 
+              style={{ fontSize:'3rem' }}
             />
           </Form.Field>
           <Form.Field
@@ -98,6 +148,7 @@ class QuestionModalClue extends Component {
           >
             {this.correctAnswer}
             {this.incorrectAnswer}
+            {this.needTheAnswer}
           </Form.Field>
         </Form>
       </Modal>
@@ -107,8 +158,7 @@ class QuestionModalClue extends Component {
 
 const mapStateToProps = state => {
   return {
-    playerGuessing: state.currentPlayer.currentPlayer,
-    modalOpenClose: state.modalOpenClick.modalOpen
+    playerGuessing: state.currentPlayer.currentPlayer
   }
 }
 
@@ -117,6 +167,7 @@ const mapDispatchToProps = dispatch => {
     addToTeamScore,
     currentPlayer,
     removeCurrentPlayer,
+    resetPointValue,
     subtractFromTeamScore
   }, dispatch);  
 }

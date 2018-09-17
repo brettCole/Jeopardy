@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'semantic-ui-react';
+import { Message, Modal, Table } from 'semantic-ui-react';
 import QuestionModalClue from '../components/QuestionModalClue';
 import CategorieTitleAndClues from '../components/CategoryTitleAndClues';
 import { bindActionCreators } from 'redux';
 import { modalCloseClick, modalOpenClick, displayClue } from '../actions';
+import { withRouter } from 'react-router';
+import TimeForDoubleJeopardy from '../components/TimeForDoubleJeopardy';
 
 class ClueBoard extends Component {
   constructor(props) {
     super(props);
 
+    this.doubleJeopardy = '';
+
     this.handleOnClick = this.handleOnClick.bind(this);
+    this.checkPointValues = this.checkPointValues.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.allClues) {
+        this.checkPointValues();
+    }
   }
 
   handleOnClick(e) {
@@ -36,22 +47,42 @@ class ClueBoard extends Component {
     // let clueInfo = this.props.categoryClues[categoryArray[e.currentTarget.cellIndex]].options.clues[clueNumber].options
     
     // let testing = window.responsiveVoice.speak("A second beast, it being like a bear. And on one side it was raised up, and there were three ribs in its mouth between its teeth; and this is what they were saying to it, Get up, eat much flesh.", "US English Male");
-    
-
-
-    // debugger;
     this.props.displayClue(clue);
-    // this.props.removeClueFromAllClues();
+  }
+
+  checkPointValues() {
+    for (let i = 0; i < this.props.allClues.length; i++) {
+      for (let j = 0; j < this.props.allClues[i].bible_clues.length; j++) {
+        if (this.props.allClues[i].bible_clues[j].point_value !== null) {
+          return false;
+        }
+      }
+    }
+    if (window.location.pathname === '/bible_jeopardy') {
+      this.doubleJeopardy = 
+        <TimeForDoubleJeopardy 
+          header="Hope everybody likes their score and the questions. Get ready it's time for Double Jeopardy!"
+          linkTitle="Double Jeopardy"  
+        />
+    } else {
+      this.doubleJeopardy = 
+        <TimeForDoubleJeopardy 
+          header="Time for final Jeopardy. Hopefully everyone will be playing. Here we go!"
+          linkTitle="Final Jeopardy"
+        />
+    }
   }
 
   render() {
     const arr = [0, 1, 2, 3, 4, 5];
     return (
       <React.Fragment>
+        {this.doubleJeopardy}
         <QuestionModalClue 
           modalOpen = {this.props.modalOpen}
           clue = {this.props.clue}
           modalClose = {this.props.modalCloseClick}
+          checkPoints = {this.checkPointValues}
         />
         <Table.Body as='tbody'>
           <Table.Row as='tr' cellAs='td'>
@@ -65,7 +96,7 @@ class ClueBoard extends Component {
                       key={i}
                       disabled={false}
                     >
-                      <CategorieTitleAndClues>200</CategorieTitleAndClues>
+                      <CategorieTitleAndClues>{this.props.categoryClues[i].bible_clues[0].point_value}</CategorieTitleAndClues>
                     </Table.Cell> 
                   )
                 })
@@ -81,7 +112,7 @@ class ClueBoard extends Component {
                       onClick={this.handleOnClick}
                       key={i}
                     >
-                      <CategorieTitleAndClues>400</CategorieTitleAndClues>
+                      <CategorieTitleAndClues>{this.props.categoryClues[i].bible_clues[1].point_value}</CategorieTitleAndClues>
                     </Table.Cell>
                   )
                 })
@@ -97,7 +128,7 @@ class ClueBoard extends Component {
                       onClick={this.handleOnClick}
                       key={i}  
                     >
-                      <CategorieTitleAndClues>600</CategorieTitleAndClues>
+                      <CategorieTitleAndClues>{this.props.categoryClues[i].bible_clues[2].point_value}</CategorieTitleAndClues>
                     </Table.Cell>
                   )
                 })
@@ -113,7 +144,7 @@ class ClueBoard extends Component {
                       onClick={this.handleOnClick}
                       key={i}  
                     >
-                      <CategorieTitleAndClues>800</CategorieTitleAndClues>
+                      <CategorieTitleAndClues>{this.props.categoryClues[i].bible_clues[3].point_value}</CategorieTitleAndClues>
                     </Table.Cell>
                   )
                 })
@@ -129,7 +160,7 @@ class ClueBoard extends Component {
                       onClick={this.handleOnClick}
                       key={i}  
                     >
-                      <CategorieTitleAndClues>1000</CategorieTitleAndClues>
+                      <CategorieTitleAndClues>{this.props.categoryClues[i].bible_clues[4].point_value}</CategorieTitleAndClues>
                     </Table.Cell>
                   )
                 })
@@ -144,6 +175,7 @@ class ClueBoard extends Component {
 const mapStateToProps = state => {
   return { 
     categoryClues: state.categoriesWithClues.categoriesWithClues,
+    allClues: state.categoriesWithClues.categoriesWithClues,
     clue: state.displayAndClues.displayedClue,
     modalOpen: state.modalOpenClick.modalOpen
   }
@@ -157,4 +189,4 @@ const mapDispatchToProps = dispatch => {
   }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClueBoard);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ClueBoard));

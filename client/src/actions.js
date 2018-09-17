@@ -10,6 +10,30 @@ export function receiveCategoriesWithClues(data) {
   }
 }
 
+export function receiveDoubleBibleCategoriesWithClues(data) {
+  return dispatch => {
+    dispatch({
+      type: 'FETCHED_DOUBLE_BIBLE_CATEGORIES_WITH_CLUES',
+      payload: data
+    });
+    dispatch({
+      type: 'CATEGORIES_WITH_CLUES_FINISHED_FETCH'
+    });
+  }
+}
+
+export function receiveFinalBibleCategoryWithClue(data) {
+  return dispatch => {
+    dispatch({
+      type: 'FETCHED_FINAL_BIBLE_CATEGORY_WITH_CLUE',
+      payload: data
+    });
+    dispatch({
+      type: 'CATEGORIES_WITH_CLUES_FINISHED_FETCH'
+    });
+  }
+}
+
 // fetch categories w/clues from jService
 export function fetchCategoriesWithClues() {
   return dispatch => {
@@ -42,6 +66,38 @@ export function fetchBibleCategoriesWithClues() {
   }
 }
 
+// fetch Double Bible Categories w/Clues
+export function fetchDoubleBibleCategoriesWithClues() {
+  return dispatch => {
+    dispatch({ type: 'DOUBLE_BIBLE_CATEGORIES_WITH_CLUES_FETCH_LOADING' });
+    return fetch('http://localhost:3001/bible_categories.json', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content_type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => dispatch(receiveDoubleBibleCategoriesWithClues(data)))
+  }
+}
+
+// fetch Final Jeopardy Category with Clue
+export function fetchFinalBibleCategoryWithClue() {
+  return dispatch => {
+    dispatch({ type: 'FETCHED_FINAL_BIBLE_JEOPARDY_CATEGORY_WITH_CLUE' });
+    return fetch('http://localhost:3001/bible_categories.json', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content_type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => dispatch(receiveFinalBibleCategoryWithClue(data)))
+  }
+}
+
 // open modal with clue
 export function modalOpenClick() {
   return dispatch => {
@@ -67,6 +123,16 @@ export function displayClue(data) {
       payload: data
     });
     dispatch({ type: 'REMOVE_CLUE_FROM_ALL_CLUES' });
+  }
+}
+
+// change clue value to null after showing and guessing clue
+export function resetPointValue(data) {
+  return dispatch => {
+    dispatch({
+      type: 'ZERO_POINT_VALUE',
+      payload: data
+    })
   }
 }
 
@@ -109,4 +175,36 @@ export function subtractFromTeamScore(playerGuessing, point_value) {
       point_value: point_value
     });
   }
+}
+
+// you are playing in final jeopardy
+export function yourPlayingFinal(player) {
+  return dispatch => {
+    dispatch({
+      type: 'YOUR_PLAYING_IN_FINAL',
+      player: player
+    });
+  }
+}
+
+// your not playing in final jeopardy
+export function yourNotPlayingFinal(player) {
+  return dispatch => {
+    dispatch({
+      type: 'YOUR_NOT_PLAYING_IN_FINAL',
+      player: player
+    });
+  }
+}
+
+// final jeopardy players make wagers
+export function makeWagers(player, wager) {
+  return dispatch => {
+    dispatch({
+      type: 'MAKE_YOUR_WAGER',
+      player,
+      wager
+    })
+  }
+  debugger;
 }

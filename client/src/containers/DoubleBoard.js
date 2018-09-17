@@ -3,14 +3,14 @@ import BibleCategoryHeader from './BibleCategoryHeader';
 import { Table } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchBibleCategoriesWithClues } from '../actions';
+import { fetchDoubleBibleCategoriesWithClues } from '../actions';
 import ClueBoard from './ClueBoard';
 import TeamAndMenu from './TeamAndMenu';
 
-class BibleBoard extends Component {
+class DoubleBoard extends Component {
 
   componentDidMount() {
-    this.props.fetchBibleCategoriesWithClues();
+    this.props.fetchDoubleBibleCategoriesWithClues();
   }
 
   render() {
@@ -35,8 +35,8 @@ class BibleBoard extends Component {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ 
-    fetchBibleCategoriesWithClues,
+    fetchDoubleBibleCategoriesWithClues,
   }, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(BibleBoard);
+export default connect(null, mapDispatchToProps)(DoubleBoard);

@@ -8,6 +8,8 @@ import modalOpenClick from './reducers/modalOpenClick';
 import displayAndClues from './reducers/displayAndCountClues';
 import currentPlayer from './reducers/currentPlayer';
 import teamScores from './reducers/teamScores';
+import whosPlayingFinal from './reducers/whosPlayingFinal';
+import makeWagers from './reducers/makeWagers';
 import { reducer as formReducer } from 'redux-form';
 
 const reducers = combineReducers({
@@ -17,6 +19,8 @@ const reducers = combineReducers({
   modalOpenClick,
   currentPlayer,
   teamScores,
+  whosPlayingFinal,
+  makeWagers,
   form: formReducer
 })
 
