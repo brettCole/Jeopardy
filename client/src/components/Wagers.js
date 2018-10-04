@@ -1,35 +1,64 @@
 import React, { Component } from "react";
-import { Button, Card, Container, Form, Input, Label, Reveal, Segment } from "semantic-ui-react";
+import { Card, Container, Form, Reveal } from "semantic-ui-react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { makeWagers } from '../actions';
+import history from '../history';
 
 class Wagers extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {value:''};
+    this.state = {
+      'Amhaarets':'',
+      'Gadites':'',
+      'Beroeans':''
+    };
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // handleChange = (e, { value, wager }) => this.setState({ [value]: wager })
-  handleChange(e) {
-    this.setState({value: e.target.value});
+  handleChange = (e) => {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+    // debugger;
+    this.setState({
+      [name]: value
+    });
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
+    let counter = this.numberOfPlayers();
+    // let player = Object.keys(this.props.whoCanPlay[e.target.dataset.key]).toString();
     debugger;
-    this.props.makeWagers(this.props.whoCanPlay[parseInt(e.target.dataset.key, 10)], parseInt(this.state.value, 10))
+    if (parseInt(e.target.dataset.key, 10) === 0) {
+    this.props.makeWagers(this.props.whoCanPlay[parseInt(e.target.dataset.key, 10)], parseInt(this.state.Amhaarets, 10));
+    } else if (parseInt(e.target.dataset.key, 10) === 1) {
+      this.props.makeWagers(this.props.whoCanPlay[parseInt(e.target.dataset.key, 10)], parseInt(this.state.Gadites, 10));
+    } else {
+      this.props.makeWagers(this.props.whoCanPlay[parseInt(e.target.dataset.key, 10)], parseInt(this.state.Beroeans, 10));
+    }
+    this.resetState();
+    if (counter === parseInt(e.target.dataset.key, 10) + 1) {
+      history.push('/final_bible_jeopardy_clue_and_answers');
+    }
   }
 
-  // makeWagers = (player) => {
-  //   debugger;
-  //   player.preventDefault();
-  //   this.props.makeWagers(player);
-  // }
+  numberOfPlayers = () => {
+    let counter = 0;
+    this.props.whoCanPlay.map(each => {
+      if (Object.values(each).toString() === 'true') {
+        counter++
+      }
+    })
+    return counter;
+  }
+
+  resetState = () => {
+    this.setState({ value: '' });
+  }
 
   render() {
     return (
@@ -41,7 +70,11 @@ class Wagers extends Component {
         >
           {
             this.props.whoCanPlay.map((each, i) => {
+              const self = this;
               if (Object.values(each).toString() === 'true') {
+                const eachPlayer = ['Amhaarets', 'Gadites', 'Beroeans'];
+                let player = eachPlayer[i];
+                {/* debugger; */}
                 return (
                   <Reveal animated='fade' instant key={i}>
                     <Reveal.Content visible style={{ pointerEvents:'none' }}>
@@ -49,7 +82,7 @@ class Wagers extends Component {
                         centered={true}
                         key={i}
                         raised={true}
-                        style={{'backgroundColor':'blue', color:'white'}}
+                        style={{'backgroundColor':'#2185d0', color:'white'}}
                       >
                         <Card.Header textAlign='center' as='h1'>
                           {Object.keys(each).toString()}
@@ -89,8 +122,8 @@ class Wagers extends Component {
                                 iconPosition='right' 
                                 focus 
                                 placeholder='Wager' 
-                                name='wager' 
-                                value={this.state.value}
+                                name={eachPlayer[i]}
+                                value={self.state.player}
                                 onChange={this.handleChange}
                               />
                             </Form.Field>
@@ -100,8 +133,6 @@ class Wagers extends Component {
                               color='blue'
                               content='Submit'
                             />
-                              {/* Submit */}
-                            {/* </Form.Button> */}
                           </Form>
                         </Card.Content>
                       </Card>
@@ -130,5 +161,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect (mapStateToProps, mapDispatchToProps)(Wagers);
-// create redux store for wager amount of each player
-  // each player card have a form to enter wager amount

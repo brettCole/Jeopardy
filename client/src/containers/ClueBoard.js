@@ -38,7 +38,8 @@ class ClueBoard extends Component {
       }
     }
 
-    window.setTimeout(window.responsiveVoice.speak(clue.description, "US English Male"), 9000);
+    // setTimeout(window.responsiveVoice.speak(clue.description, "US English Male"), 1000);
+    window.responsiveVoice.speak(clue.description, "US English Male");
 
     // let testing = setTimeout(window.responsiveVoice.speak("His being foremost in speaking was matched by his being most frequently corrected, reproved, or rebuked.", "US English Male"), 8000);
     
@@ -62,12 +63,14 @@ class ClueBoard extends Component {
       this.doubleJeopardy = 
         <TimeForDoubleJeopardy 
           header="Hope everybody likes their score and the questions. Get ready it's time for Double Jeopardy!"
+          linkBoard='/double_bible_jeopardy'
           linkTitle="Double Jeopardy"  
         />
     } else {
       this.doubleJeopardy = 
         <TimeForDoubleJeopardy 
           header="Time for final Jeopardy. Hopefully everyone will be playing. Here we go!"
+          linkBoard='/final_bible_jeopardy'
           linkTitle="Final Jeopardy"
         />
     }

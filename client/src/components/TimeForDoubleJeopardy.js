@@ -3,7 +3,6 @@ import { Button, Modal } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 const TimeForDoubleJeopardy = (props) => {
-  // debugger;
   return (
     <Modal
       open={true}
@@ -27,7 +26,7 @@ const TimeForDoubleJeopardy = (props) => {
             size='huge'
             color='green'
           >
-            <Link style={{ color:'#fff' }} to="/double_bible_jeopardy">{props.linkTitle}</Link>
+            <Link style={{ color:'#fff' }} to={props.linkBoard}>{props.linkTitle}</Link>
           </Button>
         </div>
       </Modal.Content>

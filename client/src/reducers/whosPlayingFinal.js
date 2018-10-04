@@ -2,7 +2,7 @@ export default function whosPlayingFinal(
   state = [
       {"Am-haarets": true}, 
       {"Gadites": true}, 
-      {"Boroeans": true}
+      {"Beroeans": true}
     ],
   action
 ) {

@@ -6,7 +6,7 @@ export default function fetchedCategoriesWithClues(state = [], action) {
       }
     case 'FETCHED_DOUBLE_BIBLE_CATEGORIES_WITH_CLUES':
       return {
-        categoriesWithClues: action.payload.slice(6, 13)
+        categoriesWithClues: action.payload.slice(6, 12)
       }
     case 'FETCHED_FINAL_BIBLE_CATEGORY_WITH_CLUE':
       return {

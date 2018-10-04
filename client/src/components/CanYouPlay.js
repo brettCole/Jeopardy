@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CheckYourScore from './Wagers';
 import { bindActionCreators } from 'redux';
-import { yourPlayingFinal, yourNotPlayingFinal } from '../actions';
+import { modalCloseClick, yourPlayingFinal, yourNotPlayingFinal } from '../actions';
 import Wagers from './Wagers';
 
 class CanYouPlay extends Component {
@@ -61,7 +61,7 @@ class CanYouPlay extends Component {
               as='button'
               size='huge'
               color='green'
-              /* onClick={this.showWages} */
+              onClick={this.props.modalCloseClick}
             >
               <Link
                 style={{ color:'#fff' }}
@@ -87,7 +87,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators ({
     yourPlayingFinal,
-    yourNotPlayingFinal
+    yourNotPlayingFinal,
+    modalCloseClick
   }, dispatch);
 };
 

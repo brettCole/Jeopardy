@@ -5,7 +5,6 @@ class ClueValue extends Component {
 
 
   test = (e) => {
-    debugger;
   }
 
   render() {

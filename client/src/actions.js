@@ -166,6 +166,28 @@ export function addToTeamScore(playerGuessing, point_value) {
   }
 }
 
+// add final wager to teamScore
+export function addFinalWagerToTeamScore(playerGuessing, point_value) {
+  return dispatch => {
+    dispatch({
+      type: 'ADD_FINAL_WAGER_TO_TEAM_SCORE',
+      playerGuessing,
+      point_value
+    })
+  }
+}
+
+// subtract final wager from teamScore
+export function subtractFinalWagerFromTeamScore(playerGuessing, point_value) {
+  return dispatch => {
+    dispatch({
+      type: 'SUBTRACT_FINAL_WAGER_FROM_TEAM_SCORE',
+      playerGuessing,
+      point_value
+    })
+  }
+}
+
 // subtract score from team
 export function subtractFromTeamScore(playerGuessing, point_value) {
   return dispatch => {

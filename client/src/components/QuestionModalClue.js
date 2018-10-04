@@ -81,7 +81,7 @@ class QuestionModalClue extends Component {
   render() {
 
     const { answerValue } = this.props; 
-  
+  // debugger;
     return (
       
       <Modal 

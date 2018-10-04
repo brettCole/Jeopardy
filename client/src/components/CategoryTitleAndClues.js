@@ -12,7 +12,7 @@ const CategoryTitleAndClues = (props) => {
               <Item.Header as='h1' style={{ 'display': 'inline', 'marginRight': '25%', 'fontSize': 'xxx-large' }}>{props.children}</Item.Header>
             </Fragment>
           ) : (
-            <Item.Header as='h1' style={{ 'fontSize':'3rem', fontWeight:'bold' }}>
+            <Item.Header as='h1' style={{ 'fontSize':'3rem', fontWeight:'bold', 'color':'white' }}>
               {props.children}
             </Item.Header>
           )
