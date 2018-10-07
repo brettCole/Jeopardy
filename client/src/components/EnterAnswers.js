@@ -51,7 +51,6 @@ class EnterAnswers extends Component {
       this.resetState();
     }
     if (counter === 1 || counter === parseInt(e.target.dataset.key, 10) + 1) {
-      debugger;
       history.push('/final_bible_jeopardy_winner');
     }
   }

@@ -32,7 +32,7 @@ class Wagers extends Component {
     e.preventDefault();
     let counter = this.numberOfPlayers();
     // let player = Object.keys(this.props.whoCanPlay[e.target.dataset.key]).toString();
-    debugger;
+    // debugger;
     if (parseInt(e.target.dataset.key, 10) === 0) {
     this.props.makeWagers(this.props.whoCanPlay[parseInt(e.target.dataset.key, 10)], parseInt(this.state.Amhaarets, 10));
     } else if (parseInt(e.target.dataset.key, 10) === 1) {
@@ -41,7 +41,7 @@ class Wagers extends Component {
       this.props.makeWagers(this.props.whoCanPlay[parseInt(e.target.dataset.key, 10)], parseInt(this.state.Beroeans, 10));
     }
     this.resetState();
-    if (counter === parseInt(e.target.dataset.key, 10) + 1) {
+    if (counter === 1 || counter === parseInt(e.target.dataset.key, 10) + 1) {
       history.push('/final_bible_jeopardy_clue_and_answers');
     }
   }
