@@ -14,15 +14,13 @@ class Wagers extends Component {
       'Gadites':'',
       'Beroeans':''
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = (e) => {
     const target = e.target;
     const value = target.value;
     const name = target.name;
-    // debugger;
+    
     this.setState({
       [name]: value
     });
@@ -31,17 +29,17 @@ class Wagers extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     let counter = this.numberOfPlayers();
-    // let player = Object.keys(this.props.whoCanPlay[e.target.dataset.key]).toString();
-    // debugger;
-    if (parseInt(e.target.dataset.key, 10) === 0) {
-    this.props.makeWagers(this.props.whoCanPlay[parseInt(e.target.dataset.key, 10)], parseInt(this.state.Amhaarets, 10));
-    } else if (parseInt(e.target.dataset.key, 10) === 1) {
-      this.props.makeWagers(this.props.whoCanPlay[parseInt(e.target.dataset.key, 10)], parseInt(this.state.Gadites, 10));
+    const keyValue = parseInt(e.target.dataset.key, 10)
+    
+    if (keyValue === 0) {
+    this.props.makeWagers(this.props.whoCanPlay[keyValue], parseInt(this.state.Amhaarets, 10));
+    } else if (keyValue === 1) {
+      this.props.makeWagers(this.props.whoCanPlay[keyValue], parseInt(this.state.Gadites, 10));
     } else {
-      this.props.makeWagers(this.props.whoCanPlay[parseInt(e.target.dataset.key, 10)], parseInt(this.state.Beroeans, 10));
+      this.props.makeWagers(this.props.whoCanPlay[keyValue], parseInt(this.state.Beroeans, 10));
     }
     this.resetState();
-    if (counter === 1 || counter === parseInt(e.target.dataset.key, 10) + 1) {
+    if (counter === 1 || counter === keyValue + 1) {
       history.push('/final_bible_jeopardy_clue_and_answers');
     }
   }
@@ -57,7 +55,9 @@ class Wagers extends Component {
   }
 
   resetState = () => {
-    this.setState({ value: '' });
+    this.setState({
+      value: ''
+    });
   }
 
   render() {
@@ -74,7 +74,6 @@ class Wagers extends Component {
               if (Object.values(each).toString() === 'true') {
                 const eachPlayer = ['Amhaarets', 'Gadites', 'Beroeans'];
                 let player = eachPlayer[i];
-                {/* debugger; */}
                 return (
                   <Reveal animated='fade' instant key={i}>
                     <Reveal.Content visible style={{ pointerEvents:'none' }}>
