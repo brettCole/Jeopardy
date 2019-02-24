@@ -75,8 +75,14 @@ class Wagers extends Component {
                 const eachPlayer = ['Amhaarets', 'Gadites', 'Beroeans'];
                 let player = eachPlayer[i];
                 return (
-                  <Reveal animated='fade' instant key={i}>
-                    <Reveal.Content visible style={{ pointerEvents:'none' }}>
+                  <Reveal 
+                    animated='fade' 
+                    instant key={i}
+                  >
+                    <Reveal.Content 
+                      visible
+                      style={{ pointerEvents:'none' }}
+                    >
                       <Card
                         centered={true}
                         key={i}
@@ -86,7 +92,10 @@ class Wagers extends Component {
                         <Card.Header textAlign='center' as='h1'>
                           {Object.keys(each).toString()}
                         </Card.Header>
-                        <Card.Header textAlign='center' as='h3'>
+                        <Card.Header 
+                          textAlign='center' 
+                          as='h3'
+                        >
                           No peeking on other players wagers!
                         </Card.Header>
                         <Card.Header as='h1'></Card.Header>
@@ -104,7 +113,10 @@ class Wagers extends Component {
                         <Card.Header textAlign='center' as='h1'>
                           {Object.keys(each).toString()}
                         </Card.Header>
-                        <Card.Header textAlign='center' as='h3'>
+                        <Card.Header 
+                          textAlign='center' 
+                          as='h3'
+                        >
                           Please make your wager!
                         </Card.Header>
                         <Card.Content>

@@ -16,7 +16,7 @@ class EnterAnswers extends Component {
     };
 
     this.correctIncorrectMessage = '';
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = (e) => {
@@ -34,9 +34,10 @@ class EnterAnswers extends Component {
     let counter = this.numberOfPlayers();
     const eachPlayer = ['Amhaarets', 'Gadites', 'Beroeans'];
     let stateValue;
-    if (parseInt(e.target.dataset.key, 10) === 0) {
+    const keyValue = parseInt(e.target.dataset.key, 10);
+    if (keyValue === 0) {
       stateValue = this.state.Amhaarets;
-    } else if (parseInt(e.target.dataset.key, 10) === 1) {
+    } else if (keyValue === 1) {
       stateValue = this.state.Gadites;
     } else {
       stateValue = this.state.Beroeans;
@@ -50,7 +51,7 @@ class EnterAnswers extends Component {
       this.props.subtractFinalWagerFromTeamScore(e.target.dataset.key, this.props.wager)
       this.resetState();
     }
-    if (counter === 1 || counter === parseInt(e.target.dataset.key, 10) + 1) {
+    if (counter === 1 || counter === keyValue + 1) {
       history.push('/final_bible_jeopardy_winner');
     }
   }

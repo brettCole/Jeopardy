@@ -1,5 +1,7 @@
+/* eslint-disable */
+
 import React, { Component } from 'react';
-import { Card, Container, Header, Icon } from 'semantic-ui-react';
+import { Card, Container, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 class FinalWinner extends Component {

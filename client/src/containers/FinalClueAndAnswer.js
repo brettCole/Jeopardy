@@ -1,5 +1,7 @@
+/* eslint-disable */
+
 import React, { Component } from 'react';
-import { Button, Container, Header, Item, Message, Modal } from 'semantic-ui-react';
+import { Button, Container, Header, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import CategoryTitleAndClues from '../components/CategoryTitleAndClues';
 import EnterAnswers from '../components/EnterAnswers';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Message, Modal, Table } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import QuestionModalClue from '../components/QuestionModalClue';
 import CategorieTitleAndClues from '../components/CategoryTitleAndClues';
 import { bindActionCreators } from 'redux';

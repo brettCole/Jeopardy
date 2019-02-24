@@ -228,5 +228,4 @@ export function makeWagers(player, wager) {
       wager
     })
   }
-  debugger;
 }
