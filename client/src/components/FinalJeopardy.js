@@ -6,10 +6,9 @@ import { bindActionCreators } from 'redux';
 import CanYouPlay from './CanYouPlay';
 
 class FinalJeopardy extends Component {
-  constructor(props) {
-    super(props)
-
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   componentDidMount() {
     this.props.fetchFinalBibleCategoryWithClue();

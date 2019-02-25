@@ -8,20 +8,21 @@ class TeamAndMenu extends Component {
   players = () => {
     let final = [];
     let teams = ['Am-haarets', 'Gadites', 'Beroeans'];
+    
     for (let i = 0; i < teams.length; i++) {
-        final.push(
-          <Table.Cell
-            selectable
-            colSpan="2"
-          >
-            <CategorieTitleAndClues>
-              {teams[i]}
-            </CategorieTitleAndClues>
-            <CategorieTitleAndClues>
-              {Object.values(this.props.score[i])}
-            </CategorieTitleAndClues>
-          </Table.Cell>
-        )
+      final.push(
+        <Table.Cell
+          selectable
+          colSpan="2"
+        >
+          <CategorieTitleAndClues>
+            {teams[i]}
+          </CategorieTitleAndClues>
+          <CategorieTitleAndClues>
+            {Object.values(this.props.score[i])}
+          </CategorieTitleAndClues>
+        </Table.Cell>
+      )
     }
     return final
   }
@@ -29,7 +30,7 @@ class TeamAndMenu extends Component {
   render() {
     return (
       <Table.Row>
-          {this.players()}
+        {this.players()}
       </Table.Row>
     )
   }

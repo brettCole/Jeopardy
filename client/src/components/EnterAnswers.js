@@ -32,7 +32,7 @@ class EnterAnswers extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     let counter = this.numberOfPlayers();
-    const eachPlayer = ['Amhaarets', 'Gadites', 'Beroeans'];
+    // const eachPlayer = ['Amhaarets', 'Gadites', 'Beroeans'];
     let stateValue;
     const keyValue = parseInt(e.target.dataset.key, 10);
     if (keyValue === 0) {

@@ -20,17 +20,20 @@ class ClueBoard extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.allClues) {
-        this.checkPointValues();
+      this.checkPointValues();
     }
   }
 
   handleOnClick(e) {
     this.props.modalOpenClick();
-    let categoryTitleString = e.currentTarget.parentElement.offsetParent.children[0].childNodes[0].cells[e.currentTarget.cellIndex].innerText;
-    let categoryArray = ['category_one', 'category_two', 'category_three', 'category_four', 'category_five', 'category_six'];
+    // let categoryTitleString = e.currentTarget.parentElement.offsetParent.children[0].childNodes[0].cells[e.currentTarget.cellIndex].innerText;
+    
+    // let categoryArray = ['category_one', 'category_two', 'category_three', 'category_four', 'category_five', 'category_six'];
 
     let currentModalCategory = this.props.categoryClues[e.currentTarget.cellIndex];
+    
     let clue;
+    
     for (let i = 0; i < currentModalCategory.bible_clues.length; i++) {
       if (currentModalCategory.bible_clues[i].point_value === parseInt(e.currentTarget.innerText, 10)) {
         clue = currentModalCategory.bible_clues[i];
@@ -40,14 +43,11 @@ class ClueBoard extends Component {
 
     // setTimeout(window.responsiveVoice.speak(clue.description, "US English Male"), 1000);
     window.responsiveVoice.speak(clue.description, "US English Male");
-
-    // let testing = setTimeout(window.responsiveVoice.speak("His being foremost in speaking was matched by his being most frequently corrected, reproved, or rebuked.", "US English Male"), 8000);
     
     // let randomClue = Math.floor(Math.random() * this.props.categoryClues[categoryArray[e.currentTarget.cellIndex]].options.clues.length) + 1
 
     // let clueInfo = this.props.categoryClues[categoryArray[e.currentTarget.cellIndex]].options.clues[clueNumber].options
     
-    // let testing = window.responsiveVoice.speak("A second beast, it being like a bear. And on one side it was raised up, and there were three ribs in its mouth between its teeth; and this is what they were saying to it, Get up, eat much flesh.", "US English Male");
     this.props.displayClue(clue);
   }
 
@@ -59,6 +59,7 @@ class ClueBoard extends Component {
         }
       }
     }
+
     if (window.location.pathname === '/bible_jeopardy') {
       this.doubleJeopardy = 
         <TimeForDoubleJeopardy 
@@ -86,6 +87,7 @@ class ClueBoard extends Component {
           clue = {this.props.clue}
           modalClose = {this.props.modalCloseClick}
           checkPoints = {this.checkPointValues}
+          categories = {this.props.categoryClues}
         />
         <Table.Body as='tbody'>
           <Table.Row as='tr' cellAs='td'>
@@ -99,7 +101,9 @@ class ClueBoard extends Component {
                       key={i}
                       disabled={false}
                     >
-                      <CategorieTitleAndClues>{this.props.categoryClues[i].bible_clues[0].point_value}</CategorieTitleAndClues>
+                      <CategorieTitleAndClues>
+                        {this.props.categoryClues[i].bible_clues[0].point_value}
+                      </CategorieTitleAndClues>
                     </Table.Cell> 
                   )
                 })
@@ -115,7 +119,9 @@ class ClueBoard extends Component {
                       onClick={this.handleOnClick}
                       key={i}
                     >
-                      <CategorieTitleAndClues>{this.props.categoryClues[i].bible_clues[1].point_value}</CategorieTitleAndClues>
+                      <CategorieTitleAndClues>
+                        {this.props.categoryClues[i].bible_clues[1].point_value}
+                      </CategorieTitleAndClues>
                     </Table.Cell>
                   )
                 })
@@ -131,7 +137,9 @@ class ClueBoard extends Component {
                       onClick={this.handleOnClick}
                       key={i}  
                     >
-                      <CategorieTitleAndClues>{this.props.categoryClues[i].bible_clues[2].point_value}</CategorieTitleAndClues>
+                      <CategorieTitleAndClues>
+                        {this.props.categoryClues[i].bible_clues[2].point_value}
+                      </CategorieTitleAndClues>
                     </Table.Cell>
                   )
                 })
@@ -147,7 +155,9 @@ class ClueBoard extends Component {
                       onClick={this.handleOnClick}
                       key={i}  
                     >
-                      <CategorieTitleAndClues>{this.props.categoryClues[i].bible_clues[3].point_value}</CategorieTitleAndClues>
+                      <CategorieTitleAndClues>
+                        {this.props.categoryClues[i].bible_clues[3].point_value}
+                      </CategorieTitleAndClues>
                     </Table.Cell>
                   )
                 })
@@ -163,7 +173,9 @@ class ClueBoard extends Component {
                       onClick={this.handleOnClick}
                       key={i}  
                     >
-                      <CategorieTitleAndClues>{this.props.categoryClues[i].bible_clues[4].point_value}</CategorieTitleAndClues>
+                      <CategorieTitleAndClues>
+                        {this.props.categoryClues[i].bible_clues[4].point_value}
+                      </CategorieTitleAndClues>
                     </Table.Cell>
                   )
                 })

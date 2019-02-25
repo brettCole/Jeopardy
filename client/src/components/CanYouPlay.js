@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CheckYourScore from './Wagers';
+// import CheckYourScore from './Wagers';
 import { bindActionCreators } from 'redux';
 import { modalCloseClick, yourPlayingFinal, yourNotPlayingFinal } from '../actions';
-import Wagers from './Wagers';
+// import Wagers from './Wagers';
 
 class CanYouPlay extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     this.checkIfPlaying();

@@ -4,7 +4,8 @@ import ModalPlayerButtons from './ModalPlayerButtons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addToTeamScore, currentPlayer, removeCurrentPlayer, resetPointValue, subtractFromTeamScore } from '../actions';
-import { Field, reduxForm, formValueSelector, reset } from 'redux-form';
+// import { Field, reduxForm, formValueSelector, reset } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 
 class QuestionModalClue extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class QuestionModalClue extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.reset();
+
     if (this.props.answerValue.toLowerCase() === this.props.clue.answer.toLowerCase() && this.props.playerGuessing !== '') {
       this.correctAnswer = <Message
         size="massive"
@@ -62,14 +64,14 @@ class QuestionModalClue extends Component {
       header="Correct Answer Is..."
       content={`${this.props.clue.answer}`}
     />
-    // this.forceUpdate();
+    this.forceUpdate();
     this.props.resetPointValue(this.props.clue);
     setTimeout(() => {
       this.correctAnswer = '';
       this.incorrectAnswer = '';
       this.needTheAnswer = '';
       this.props.modalClose();
-    }, 0)
+    }, 4000)
   }
 
 
@@ -80,29 +82,40 @@ class QuestionModalClue extends Component {
 
   render() {
 
-    const { answerValue } = this.props; 
-  // debugger;
+    // const { answerValue } = this.props; 
+debugger;
     return (
-      
       <Modal 
         open={this.props.modalOpen}
         centered={true}
         size='fullscreen' 
         dimmer='blurring'
-        style={{ 'textAlign': 'center', 'marginTop': '20px', 'backgroundColor': '#2185d0' }} 
+        style={{ 
+          'textAlign':'center', 'marginTop': '20px', 'backgroundColor': '#2185d0' 
+        }} 
       >
         <Modal.Content
-          style={{ 'backgroundColor': '#2185d0', 'color': '#fff' }}
+          style={{ 
+            'backgroundColor':'#2185d0', 'color':'#fff' 
+          }}
         >
           {
             this.props.clue !== undefined &&
+              <>
+              <Modal.Header
+                as='h1'
+                style={{ fontSize:'5rem' }}
+              >
+                {[this.props.categories[this.props.clue.bible_category_id - 1].title] + " for " +[this.props.clue.point_value]}
+              </Modal.Header>
               <Modal.Header
                 as='h1'
                 onClick={this.props.modalClose}
-                style={{ fontSize:'4rem' }}     
+                style={{ fontSize:'3rem' }}     
               >
                 {this.props.clue.description}
               </Modal.Header>
+              </>
           }
         </Modal.Content>
         <ModalPlayerButtons playersAnswer={this.playersAnswer} />
@@ -115,8 +128,7 @@ class QuestionModalClue extends Component {
             onClick={this.showClueAnswer}
           >
             <Button.Content visible>
-              <Icon name='frown outline' />
-              What is... We don't know!
+              <Icon name='frown outline' />What is... We don't know!
             </Button.Content>
             <Button.Content hidden>
               We need the answer!
@@ -130,7 +142,9 @@ class QuestionModalClue extends Component {
         >
           <Form.Field 
             width={6} 
-            style={{ 'marginLeft': 'auto', 'marginRight': 'auto', 'marginTop': '20px', 'marginBottom': '10px' }}
+            style={{ 
+              'marginLeft':'auto', 'marginRight':'auto', 'marginTop':'20px', 'marginBottom':'10px' 
+            }}
             disabled={this.props.playerGuessing === undefined}
           >
             <label style={{ 'color': 'white', fontSize:'3rem' }}>Player's Answer</label>
@@ -144,7 +158,9 @@ class QuestionModalClue extends Component {
           </Form.Field>
           <Form.Field
             width={6}
-            style={{ 'marginLeft': 'auto', 'marginRight': 'auto', 'marginTop': '20px', 'marginBottom': '10px' }}
+            style={{ 
+              'marginLeft':'auto', 'marginRight':'auto', 'marginTop':'20px', 'marginBottom':'10px' 
+            }}
           >
             {this.correctAnswer}
             {this.incorrectAnswer}

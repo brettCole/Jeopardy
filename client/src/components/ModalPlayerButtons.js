@@ -5,6 +5,7 @@ const ModalPlayerButtons = (props) => {
   const players = () => {
     let teams = ['Am-haarets', 'Gadites', 'Beroeans']
     let finalPlayers = [];
+    
     for (let i = 0; i < teams.length; i++) {
       finalPlayers.push(
         <Button 
