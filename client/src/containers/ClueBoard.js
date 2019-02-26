@@ -78,6 +78,7 @@ class ClueBoard extends Component {
   }
 
   render() {
+    // debugger;
     const arr = [0, 1, 2, 3, 4, 5];
     return (
       <React.Fragment>
@@ -99,7 +100,9 @@ class ClueBoard extends Component {
                       selectable 
                       onClick={this.handleOnClick}
                       key={i}
-                      disabled={false}
+                      disabled={
+                        this.props.categoryClues[i].bible_clues[0].point_value == null ? true : false
+                      }
                     >
                       <CategorieTitleAndClues>
                         {this.props.categoryClues[i].bible_clues[0].point_value}
@@ -118,6 +121,9 @@ class ClueBoard extends Component {
                       selectable
                       onClick={this.handleOnClick}
                       key={i}
+                      disabled={
+                        this.props.categoryClues[i].bible_clues[1].point_value == null ? true : false
+                      }
                     >
                       <CategorieTitleAndClues>
                         {this.props.categoryClues[i].bible_clues[1].point_value}
@@ -136,6 +142,9 @@ class ClueBoard extends Component {
                       selectable
                       onClick={this.handleOnClick}
                       key={i}  
+                      disabled={
+                        this.props.categoryClues[i].bible_clues[2].point_value == null ? true : false
+                      }
                     >
                       <CategorieTitleAndClues>
                         {this.props.categoryClues[i].bible_clues[2].point_value}
@@ -154,6 +163,9 @@ class ClueBoard extends Component {
                       selectable
                       onClick={this.handleOnClick}
                       key={i}  
+                      disabled={
+                        this.props.categoryClues[i].bible_clues[3].point_value == null ? true : false
+                      }
                     >
                       <CategorieTitleAndClues>
                         {this.props.categoryClues[i].bible_clues[3].point_value}
@@ -171,7 +183,10 @@ class ClueBoard extends Component {
                     <Table.Cell 
                       selectable
                       onClick={this.handleOnClick}
-                      key={i}  
+                      key={i} 
+                      disabled={
+                        this.props.categoryClues[i].bible_clues[4].point_value == null ? true : false
+                      } 
                     >
                       <CategorieTitleAndClues>
                         {this.props.categoryClues[i].bible_clues[4].point_value}
