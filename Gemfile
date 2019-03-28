@@ -21,6 +21,8 @@ gem 'japi'
 
 gem 'pry'
 
+gem 'railties', '>= 5.2.2.1'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
