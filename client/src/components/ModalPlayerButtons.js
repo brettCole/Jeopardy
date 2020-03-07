@@ -21,7 +21,6 @@ const ModalPlayerButtons = (props) => {
     return finalPlayers
   }
   
-
   return (
     <Button.Group color='blue' as='h2'>
       {players()}
